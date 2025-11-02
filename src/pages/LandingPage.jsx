@@ -33,8 +33,8 @@ const LandingPage = ({ onOpenInvitation }) => (
             transition={{ duration: 0.8 }}
             className="text-center mb-10 px-4"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-rose-400 leading-snug">
-              Thư Mời Cưới
+            <h2 className="text-4xl sm:text-5xl md:text-4xl font-serif text-rose-400 leading-snug">
+              Thiệp mời cưới
             </h2>
           </motion.div>
 

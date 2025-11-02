@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
-import Marquee from "@/components/ui/marquee";
 import {
   Calendar,
   Clock,
@@ -24,7 +23,7 @@ export default function Wishes() {
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [wishes, setWishes] = useState([]);
-  const [toast, setToast] = useState(null); // { type: 'success' | 'error', message: '' }
+  const [toast, setToast] = useState(null);
 
   const options = [
     { value: "ATTENDING", label: "Có, tôi sẽ tham dự" },
@@ -63,7 +62,6 @@ export default function Wishes() {
 
       if (!response.ok) {
         setToast({ type: "error", message: "Gửi lời chúc thất bại!" });
-        console.error("Gửi Formspree thất bại:", response.statusText);
         return;
       }
 
@@ -86,7 +84,6 @@ export default function Wishes() {
 
       setToast({ type: "success", message: "Gửi lời chúc thành công!" });
     } catch (error) {
-      console.error("Lỗi gửi Formspree:", error);
       setToast({ type: "error", message: "Gửi lời chúc thất bại!" });
     } finally {
       setIsSubmitting(false);
@@ -143,50 +140,58 @@ export default function Wishes() {
         </motion.div>
 
         {/* Danh sách lời chúc */}
-        <div className="max-w-2xl mx-auto space-y-6">
-          <AnimatePresence>
-            <Marquee
-              speed={20}
-              gradient={false}
-              className="[--duration:20s] py-2"
-            >
-              {wishes.map((wish, index) => (
-                <motion.div
-                  key={wish.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="group relative w-[280px]"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-rose-100/50 to-pink-100/50 rounded-xl transform transition-transform group-hover:scale-[1.02] duration-300" />
-                  <div className="relative backdrop-blur-sm bg-white/80 p-4 rounded-xl border border-rose-100/50 shadow-md">
-                    <div className="flex items-start space-x-3 mb-2">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-rose-400 to-pink-400 flex items-center justify-center text-white text-sm font-medium">
-                        {wish.name[0].toUpperCase()}
+        <div className="relative w-full overflow-hidden">
+          <motion.div
+            className="flex gap-4 animate-marquee"
+            style={{
+              display: "inline-flex",
+              animation: "scroll 30s linear infinite",
+            }}
+          >
+            {wishes.concat(wishes).map((wish, index) => (
+              <motion.div
+                key={`${wish.id}-${index}`}
+                className="group relative w-[280px] flex-shrink-0"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-rose-100/50 to-pink-100/50 rounded-xl transform transition-transform group-hover:scale-[1.02] duration-300" />
+                <div className="relative backdrop-blur-sm bg-white/80 p-4 rounded-xl border border-rose-100/50 shadow-md">
+                  <div className="flex items-start space-x-3 mb-2">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-rose-400 to-pink-400 flex items-center justify-center text-white text-sm font-medium">
+                      {wish.name[0].toUpperCase()}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center space-x-2">
+                        <h4 className="font-medium text-gray-800 text-sm truncate">
+                          {wish.name}
+                        </h4>
+                        {getAttendanceIcon(wish.attending)}
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center space-x-2">
-                          <h4 className="font-medium text-gray-800 text-sm truncate">
-                            {wish.name}
-                          </h4>
-                          {getAttendanceIcon(wish.attending)}
-                        </div>
-                        <div className="flex items-center space-x-1 text-gray-500 text-xs">
-                          <Clock className="w-3 h-3" />
-                          <time>{formatEventDate(wish.timestamp)}</time>
-                        </div>
+                      <div className="flex items-center space-x-1 text-gray-500 text-xs">
+                        <Clock className="w-3 h-3" />
+                        <time>{formatEventDate(wish.timestamp)}</time>
                       </div>
                     </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {wish.message}
-                    </p>
                   </div>
-                </motion.div>
-              ))}
-            </Marquee>
-          </AnimatePresence>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {wish.message}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
+
+        {/* CSS animation cho marquee */}
+        <style>{`
+          @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          .animate-marquee {
+            display: flex;
+            width: max-content;
+          }
+        `}</style>
 
         {/* Form */}
         <motion.div
@@ -233,7 +238,9 @@ export default function Wishes() {
                       : "Chọn trạng thái..."}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    className={`w-5 h-5 text-gray-400 transition-transform ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
 

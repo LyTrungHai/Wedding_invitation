@@ -3,7 +3,7 @@ import QRNhu from "@/assets/qr_nhu.jpg";
 const config = {
   data: {
     // Main invitation title that appears on the page
-    title: "Thư mời cưới Trung Hải & Quỳnh Như",
+    title: "Thiệp mời cưới Trung Hải & Quỳnh Như",
     // Opening message/description of the invitation
     description:
       "Chúng mình sắp kết hôn và trân trọng kính mời bạn cùng chung vui trong khoảnh khắc đặc biệt này", // Nanti ini dibikin random

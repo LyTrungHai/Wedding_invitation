@@ -8,10 +8,10 @@ import IMG3 from "@/assets/IMGL1306a.jpg";
 import IMG4 from "@/assets/IMGL1328a.jpg";
 import IMG5 from "@/assets/IMGL1354a.jpg";
 import IMG6 from "@/assets/IMGL1551a.jpg";
-import IMG7 from "@/assets/JNP00129.JPG";
+import IMG7 from "@/assets/JNP00129.jpg";
 import IMG8 from "@/assets/JNP00114.JPG";
 import IMG9 from "@/assets/JNP00102.JPG";
-import IMG10 from "@/assets/IMGL1238a.JPG";
+import IMG10 from "@/assets/IMGL1238a.jpg";
 import IMG11 from "@/assets/IMGL1510a.jpg";
 import IMG12 from "@/assets/IMGL1428a.jpg";
 

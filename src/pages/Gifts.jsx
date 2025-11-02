@@ -29,14 +29,14 @@ export default function Gifts() {
   };
 
   // ✅ Hàm tải QR về
-  const handleDownload = (qrUrl, bankName) => {
-    const link = document.createElement("a");
-    link.href = qrUrl;
-    link.download = `QR-${bankName || "Bank"}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  // const handleDownload = (qrUrl, bankName) => {
+  //   const link = document.createElement("a");
+  //   link.href = qrUrl;
+  //   link.download = `QR-${bankName || "Bank"}.png`;
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
   return (
     <>
@@ -202,7 +202,7 @@ export default function Gifts() {
             </button>
 
             {/* Nút tải xuống */}
-            <button
+            {/* <button
               onClick={() =>
                 handleDownload(selectedQR.qrImage, selectedQR.bank)
               }
@@ -210,7 +210,7 @@ export default function Gifts() {
             >
               <Download className="w-5 h-5" />
               Tải mã QR
-            </button>
+            </button> */}
           </motion.div>
         </motion.div>
       )}

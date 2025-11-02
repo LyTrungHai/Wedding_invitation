@@ -41,7 +41,7 @@ export default function Location() {
               viewport={{ once: true }}
               className="text-2xl md:text-3xl font-serif text-gray-800"
             >
-              Số 57 - Xã Ea Súp - Tỉnh Đắk Lắk
+              Địa điểm tổ chức tiệc cưới của chúng mình
             </motion.h2>
 
             {/* Decorative Divider */}
